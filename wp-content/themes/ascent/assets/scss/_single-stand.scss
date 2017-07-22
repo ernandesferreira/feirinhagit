@@ -1,0 +1,414 @@
+body.single-stand{
+
+	[contenteditable=true]:empty:before {
+	  content: attr(placeholder);
+	  display: block; /* For Firefox */
+	  opacity: 0.35;
+	}
+
+	.main-content{
+		position: relative;
+		padding-top: 280px;
+	}
+
+	.banner{
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 250px;
+		background: #CCC;
+		background-size:cover;
+		background-position: center center;
+	}
+
+	// Botão Editar
+	.botoes-edicao{
+		position: fixed;
+		right: 50px;
+		top: 50px;
+		z-index: 100;
+		transition-duration: 0.3s;
+		text-align: center;
+		.botao{
+			position:relative;
+			width: 60px;
+			height: 60px;
+			border-radius:50%;
+			color: #FFF;
+			font-size: 25px;
+			box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.3);
+			cursor: pointer;
+			display: inline-block;
+			vertical-align: top;
+			margin: 0 5px;
+			background: #ccc;
+			//transition-duration: 0.3s;
+
+			&.botao-editar{ background: #61aa91; }
+			&.botao-salvar{ background: #33cc66; display: none; }
+			&.botao-cancelar{ background: #dd5151; display: none; }
+
+			i{
+				position: absolute;
+				left: 50%;
+				transform: translateX( -50% ) translateY( -50% );
+				-webkit-transform: translateX( -50% ) translateY( -50% );
+				-moz-transform: translateX( -50% ) translateY( -50% );
+				-ms-transform: translateX( -50% ) translateY( -50% );
+				-o-transform: translateX( -50% ) translateY( -50% );
+				top: 50%;
+			}
+
+			&:hover{
+				width: 65px;
+				height: 65px;
+				font-size: 30px;
+			}
+
+		}
+	}
+
+	// Informações
+	.infos{
+		position: relative;
+		width: 100%;
+		margin-bottom: 50px;
+
+		.texto{
+			position: relative;
+			width: 60%;
+			min-width: 280px;
+			max-width: 100%;
+			display: inline-block;
+			vertical-align: top;
+
+			.titulo{
+				font-size: 45px;
+				font-weight: 600;
+				color: #454545;
+			}
+
+			.numeros{
+				position: relative;
+				width: 100%;
+				margin-bottom: 15px;
+				color: #61aa91;
+				
+
+				.numero{
+					position: relative;
+					padding: 2px 5px;
+					font-size: 14px;
+					
+					font-weight: 600;
+					border: 1px solid #61aa91;
+					display: inline-block;
+					vertical-align: middle;
+				}
+			}
+
+			.descricao{
+				position: relative;
+				white-space: pre-wrap;
+				font-size: 14px;
+				color: #565656
+			}
+		}	
+
+		.imagem{
+			position:relative;
+			width: 38%;
+			min-width: 280px;
+			max-width: 100%;
+			display: inline-block;
+			vertical-align: top;
+			text-align: right;
+
+			img{
+				border: 15px solid #f6f6f6;
+				border-bottom-width: 50px;
+				box-shadow: 2px 2px 10px 1px rgba(0,0,0,0.25);
+				width: 350px;
+			}
+
+		}
+	}
+
+	// Padroes
+
+	.galeria .titulo,
+	.contato .titulo{
+			font-size: 30px;
+			text-align: center;
+			color: #61aa91;
+			margin-bottom: 10px;
+		}
+
+	// Galeria
+
+	.galeria{
+
+		position: relative;
+		margin-bottom: 50px;
+
+		.imagens{
+			position: relative;
+			width: 100%;
+			text-align:left;
+			padding: 0 80px;
+
+			img{
+				margin: 5px;
+			}
+		}
+	}
+
+	// Contato
+
+	.contato{
+		position: relative;
+		margin-bottom: 50px;
+
+		.conteudo{
+			position: relative;
+			width: 100%;
+			text-align: center;
+
+			.item{
+				position:relative;
+				min-width: 200px;
+				max-width: calc( 100% - 40px );
+				font-size: 16px;
+				color: #555;
+				border: 2px solid #61aa91;
+				margin: 5px;
+				display: inline-block;
+				vertical-align: top;
+
+				.icone{
+					position: absolute;
+					color:#FFF;
+					background: #61aa91;
+					padding: 15px 20px;
+
+				}
+
+				.info{
+					padding: 15px 20px;
+					padding-left: 70px;
+					min-height: 51px;
+				}
+			}
+
+		}
+	}
+
+	//Redes Sociais
+	.redes-sociais{
+		position: relative;
+		margin-bottom: 50px;
+		.conteudo{
+			position: relative;
+			width: 100%;
+			text-align: center;
+			font-size: 14px;
+
+			.item{
+				position: relative;
+				text-align: center;
+				width: 35px;
+				height: 35px;
+				background:#CCC;
+				display: inline-block;
+				vertical-align: top;
+				margin: 10px;
+				cursor: pointer;
+
+				i{
+					position: absolute;
+					left: 50%;
+					transform: translateX( -50% ) translateY( -50% );
+					-webkit-transform: translateX( -50% ) translateY( -50% );
+					-moz-transform: translateX( -50% ) translateY( -50% );
+					-ms-transform: translateX( -50% ) translateY( -50% );
+					-o-transform: translateX( -50% ) translateY( -50% );
+					top: 50%;
+				}
+
+				.info{
+					display: none;
+				}
+
+				&.facebook{ background: #3b5998; color: #FFF; }
+				&.twitter{ background: #2aa9e0; color: #FFF; }
+				&.instagram{ background:#d92e7f; background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf); color: #FFF; }
+				&.google-plus{ background: #dc4e41; color: #FFF; }
+				&.youtube{ background: #ee1c1b; color: #FFF; }
+				&.linkedin{ background: #0077b5; color: #FFF; }
+
+
+				  
+
+			}
+
+		}
+	}
+
+	// Visitas
+
+	.visitas{
+		position: relative;
+		text-align: center;
+
+		.texto{
+			position:relative;
+			min-width: 200px;
+			max-width: calc( 100% - 40px );
+			padding: 15px 50px;
+			font-size: 14px;
+			color: #FFF;
+			background: #61aa91;
+			display: inline-block;
+
+			span{
+				font-size: 24px;
+				font-weight: 600;
+			}
+		}
+	}
+
+
+	// Edicao
+
+	div[class^="editar-"]{
+		display: none;
+	}
+
+	&.editing{
+
+		.editar-banner, .editar-imagem{
+			position: absolute;
+			display: block;
+			left: 50%;
+			transform: translateX( -50% ) translateY( -50% );
+			-webkit-transform: translateX( -50% ) translateY( -50% );
+			-moz-transform: translateX( -50% ) translateY( -50% );
+			-ms-transform: translateX( -50% ) translateY( -50% );
+			-o-transform: translateX( -50% ) translateY( -50% );
+			top: 50%;
+			cursor: pointer;
+			color: #FFF;
+			background: rgba(0,0,0,0.5);
+			padding: 10px 20px;
+			border-radius: 10px;
+			opacity: 0.8;
+			transition: .3s;
+
+			&:hover{
+				padding: 11px 21px;
+				background: rgba(0,0,0,0.8);
+				opacity: 1;
+			}
+
+		}
+
+		.editar-imagem{
+			left: 60%!important;
+		}
+
+
+		.infos .texto .titulo, .infos .texto .descricao{
+			border: 2px dashed #DDD;
+			border-radius: 5px;
+			padding: 2px;
+		}
+
+		.editar-galeria{
+			position: relative;
+			width: 150px;
+			height: 150px;
+			background: #EDEDED;
+			color: #BBB;
+			display: inline-block;
+			margin: 5px;
+			cursor: pointer;
+			border: 2px dashed #CCC;
+			font-size: 48px;
+			vertical-align: top;
+
+			i{
+				position: absolute;
+				left: 50%;
+				transform: translateX( -50% ) translateY( -50% );
+				-webkit-transform: translateX( -50% ) translateY( -50% );
+				-moz-transform: translateX( -50% ) translateY( -50% );
+				-ms-transform: translateX( -50% ) translateY( -50% );
+				-o-transform: translateX( -50% ) translateY( -50% );
+				top: 50%;
+			}
+
+			&:hover{
+				background: #f6f6f6;
+			}
+		}
+
+		.contato .conteudo .item{
+			display: inline-block;
+			border-style: dashed;
+		}
+
+		.redes-sociais .conteudo {
+
+			padding: 0 30px;
+
+			.item{
+
+				margin: 5px 50% 5px 10%;
+				cursor: default;
+
+				.info{
+				    position: relative;
+				    width: 400px;
+				    color: #333;
+				    border: 2px dashed #61aa91;
+				    padding: 6px 10px;
+				    margin-left: 37px;
+				    text-align: left;
+				    display: block;
+				    cursor: text;
+				}
+			}
+		}
+	}
+
+	// Responsivo
+
+	@media (max-width: 768px){
+
+		.infos{
+			.texto, .imagem{
+				width: 100%;
+				text-align: center;
+			}
+
+			.imagem{
+				margin-top: 30px;
+			}
+		}
+
+		.contato .item{
+			width: 100%;
+
+			.icone{
+				width: 50px;
+			}
+		}
+
+		.visitas .texto{
+			width: 100%;
+		}
+
+	}
+	
+}
