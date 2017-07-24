@@ -33,11 +33,9 @@
 			$('.botao-salvar, .botao-cancelar').hide();
 			$('.botao-editar').css({'display':'inline-block'});
 
-			$('.botoes-edicao .botao').animate({'width':'60px', 'height':'60px', 'font-size':'25px', 'opacity': '1'},500, function(){
-				$('.botao-editar').attr('style',false);
+			$('.carregando, .carregandoBG').fadeIn(500);
+			location.reload();
 
-				location.reload();
-			});
 		});
 	});
 
@@ -49,9 +47,7 @@
 			$('.botao-salvar, .botao-cancelar').hide();
 			$('.botao-editar').css({'display':'inline-block'});
 
-			$('.botoes-edicao .botao').animate({'width':'60px', 'height':'60px', 'font-size':'25px', 'opacity': '1'},500, function(){
-				$('.botao-editar').attr('style',false);
-			});
+			$('.carregando, .carregandoBG').fadeIn(500);
 		});
 
 		////// Valores
@@ -91,10 +87,16 @@
 				'm':m
 			},
 			success:function(response){
+
+				if( typeof(response.error) !== "undefined" ){
+					alert(response.error);
+				}
+
 				location.reload();
 			},
 			error:function(error){
 				console.error(error);
+				$('.carregando, .carregandoBG').hide();
 				alert(error);
 			}
 		});

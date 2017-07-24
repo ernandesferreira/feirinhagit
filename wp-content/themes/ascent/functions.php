@@ -415,3 +415,13 @@ if( !function_exists( 'ascent_options_stylesheets_alt_style' ) ) {
     }
 }
 add_action( 'wp_enqueue_scripts', 'ascent_options_stylesheets_alt_style' );
+
+
+add_action( 'admin_init', 'redirect_non_admin_users' );
+function redirect_non_admin_users() {
+    global $current_user;
+    if ( !in_array( 'administrator', $current_user->roles ) && !DOING_AJAX && '/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF'] ) {
+        wp_redirect( home_url() );
+        exit;
+    }
+}

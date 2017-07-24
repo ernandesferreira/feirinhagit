@@ -1,16 +1,39 @@
-<?php get_header(); 
+<?php 
 
-	global $post;
+session_start();
+
+get_header(); 
+
+	global $post, $current_user;
+
+	$num_visitas = get_post_meta($post->ID, 'num_visitas', true);
+
+	if( !isset($_SESSION['nova_visita_stand']) ){
+		update_post_meta($post->ID, 'num_visitas', $num_visitas + 1);
+		$num_visitas = get_post_meta($post->ID, 'num_visitas', true);
+		$_SESSION['nova_visita_stand'] = time();
+	}
 
 	$banner = get_template_directory_uri().'/assets/images/banner_stand.jpg';
 
 ?>
 
+
+<?php 
+
+$dono =  get_post_meta($post->ID, 'dono_stand', true);
+
+if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrator', $current_user->roles )) ) { ?>
 <div class="botoes-edicao">
 	<div class="botao botao-editar" title="Editar Página" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-pencil"></i></div>
 	<div class="botao botao-salvar" title="Salvar" data-toggle="tooltip" data-id="<?php echo $post->ID; ?>" data-placement="bottom"><i class="fa fa-floppy-o"></i></div>
 	<div class="botao botao-cancelar" title="Cancelar" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-times"></i></div>
 </div>
+
+<div class="carregando">Carregando...</div>
+<div class="carregandoBG"></div>
+
+<?php } ?>
 
 <div class="banner" style="background-image: url(<?php echo $banner; ?>)">
 	
@@ -44,6 +67,7 @@
 
 </div>
 
+<?php if( get_post_meta( $post->ID, 'assinatura_premium', true ) == 1 ){ ?>
 <div class="galeria">
 	<div class="titulo">Galeria</div>
 	<div class="imagens">
@@ -63,6 +87,7 @@
 
 	</div>
 </div>
+<?php } ?>
 
 <div class="contato">
 	<div class="titulo">Contato</div>
@@ -129,7 +154,7 @@
 
 <div class="visitas">
 	<div class="texto">
-		Número de visitas <br> <span>573</span>
+		Número de visitas <br> <span><?php echo number_format($num_visitas,'0',',','.'); ?></span>
 	</div>
 </div>
 
