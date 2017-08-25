@@ -6,6 +6,10 @@
  */
 
 
+
+add_image_size( 'banner_single_stand', 1500, 250, true );
+add_image_size( 'thumb_galeria_single_stand', 150, 150, true );
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
@@ -212,6 +216,11 @@ function ascent_scripts() {
     wp_enqueue_script( 'ascent-meanmenu', get_template_directory_uri() . '/includes/js/jquery.meanmenu.js', array('jquery') );
     wp_enqueue_script( 'ascent-velocity', get_template_directory_uri() . '/includes/js/jquery.velocity.js', array('jquery') );
     wp_enqueue_script( 'ascent-appear-config', get_template_directory_uri() . '/includes/js/appear.config.js', array('jquery') );
+
+    // LightBox
+    wp_enqueue_script( 'lightbox2-master-js', get_template_directory_uri() . '/assets/lib/lightbox2-master/js/lightbox.js', array( 'jquery' ) );
+    wp_enqueue_style('lightbox2-master-css', get_template_directory_uri() . '/assets/lib/lightbox2-master/css/lightbox.css');
+
 
     // Theme main js
     wp_enqueue_script( 'ascent-themejs', get_template_directory_uri() . '/includes/js/main.js', array('jquery') );
@@ -424,4 +433,9 @@ function redirect_non_admin_users() {
         wp_redirect( home_url() );
         exit;
     }
+}
+
+function loadMediaUpload() {
+    wp_enqueue_script('media-upload');
+    wp_enqueue_media();
 }

@@ -2,24 +2,43 @@
 
 session_start();
 
+// media
+loadMediaUpload();
+
 get_header(); 
 
-	global $post, $current_user;
 
+
+global $post, $current_user;
+
+$num_visitas = get_post_meta($post->ID, 'num_visitas', true);
+
+if( !isset($_SESSION['nova_visita_stand']) ){
+	update_post_meta($post->ID, 'num_visitas', $num_visitas + 1);
 	$num_visitas = get_post_meta($post->ID, 'num_visitas', true);
+	$_SESSION['nova_visita_stand'] = time();
+}
 
-	if( !isset($_SESSION['nova_visita_stand']) ){
-		update_post_meta($post->ID, 'num_visitas', $num_visitas + 1);
-		$num_visitas = get_post_meta($post->ID, 'num_visitas', true);
-		$_SESSION['nova_visita_stand'] = time();
-	}
+$banner_id = get_post_meta( $post->ID, 'banner', true );
+if( is_numeric($banner_id) ){
+
+	$banner = wp_get_attachment_image_src( $banner_id, 'banner_single_stand' );
+	$banner = $banner[0];
+
+} else {
 
 	$banner = get_template_directory_uri().'/assets/images/banner_stand.jpg';
+}
 
-?>
+$categorias = wp_get_post_categories($post->ID);
 
+$nomes_categorias = array();
 
-<?php 
+foreach ($categorias as $categoria) {
+	$nomes_categorias[] = get_the_category_by_ID($categoria);
+}
+
+$numeros = get_field('numeros');
 
 $dono =  get_post_meta($post->ID, 'dono_stand', true);
 
@@ -35,7 +54,7 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 
 <?php } ?>
 
-<div class="banner" style="background-image: url(<?php echo $banner; ?>)">
+<div class="banner" style="background-image: url(<?php echo $banner; ?>)" newId="<?php echo $banner_id; ?>">
 	
 	<div class="editar-banner"><i class="fa fa-camera"></i> Trocar Imagem</div>
 
@@ -45,20 +64,29 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 	
 	<div class="texto">
 		<div class="titulo editable"><?php echo $post->post_title; ?></div>
-		<div class="numeros"> Categoria: Moda Infantil </div>
+		<div class="numeros"> Categoria: <?php echo implode(', ',$nomes_categorias); ?> </div>
+		<?php if (is_array($numeros)){ 
+			asort($numeros);
+		?>
 		<div class="numeros">
 		Stands: 
-			<div class="numero">253</div>
-			<div class="numero">254</div>
+			<?php foreach ($numeros as $numero) { ?>
+
+			<div class="numero"><?php echo $numero['numero']; ?></div>
+
+			<?php } ?>
 		</div>
+		<?php } ?>
 		<div class="descricao editable"><?php echo $post->post_content; ?></div>
 	</div>
-	<div class="imagem">
+	<div class="imagem" newId="<?php echo get_post_thumbnail_id( $post->ID ); ?>">
 		<div class="editar-imagem"><i class="fa fa-camera"></i> Trocar Imagem</div>
 		<?php 
 			if( get_post_thumbnail_id( $post->ID ) ){
-				remove_action( 'begin_fetch_post_thumbnail_html', '_wp_post_thumbnail_class_filter_add' );
-				echo get_the_post_thumbnail( $post->ID, array( 350, 320));
+				$imagem = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+				$imagem = $imagem[0];
+
+				echo '<img src="'.$imagem.'" width="350px" />';
 			}else{
 				echo '<img src="http://via.placeholder.com/350x320" />';
 			}
@@ -67,21 +95,43 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 
 </div>
 
-<?php if( get_post_meta( $post->ID, 'assinatura_premium', true ) == 1 ){ ?>
+<?php if( get_post_meta( $post->ID, 'assinatura_premium', true ) == 1 ){ 
+
+
+$galeria = get_post_meta( $post->ID, 'galeria', true );
+
+if( $galeria ){
+
+	$imagens_galeria = explode(',', $galeria);
+}
+
+?>
 <div class="galeria">
 	<div class="titulo">Galeria</div>
 	<div class="imagens">
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
-		<img src="http://via.placeholder.com/150x150" />
+		<span class="holder">
+		<?php if( is_array($imagens_galeria) ){
+			foreach ($imagens_galeria as $imagem_galeria_id) {
+
+				$imagem_galeria_thumb = wp_get_attachment_image_src( $imagem_galeria_id, 'thumb_galeria_single_stand' );
+				$imagem_galeria_thumb = $imagem_galeria_thumb[0];
+
+				$imagem_galeria = wp_get_attachment_image_src( $imagem_galeria_id, 'full' );
+				$imagem_galeria = $imagem_galeria[0];
+
+		?>
+
+		<div class="img">
+			<div class="delete" title="Excluir Imagem" data-toggle="tooltip"><i class="fa fa-times"></i></div>
+			<a href="<?php echo $imagem_galeria; ?>" gId="<?php echo $imagem_galeria_id; ?>" class="item_galeria" data-lightbox="galeria">
+				<img src="<?php echo $imagem_galeria_thumb; ?>" width="150px" height="150px" />
+			</a>
+		</div>
+
+
+		<?php } } ?>
+		</span>
+
 
 		<div class="editar-galeria" title="Adicionar foto" data-toggle="tooltip"><i class="fa fa-plus"></i></div>
 

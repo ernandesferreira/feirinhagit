@@ -195,6 +195,32 @@ body.single-stand{
 			img{
 				margin: 5px;
 			}
+
+			.img{
+				position: relative;
+				display: inline-block;
+				vertical-align: top;
+
+				.delete{
+					position: absolute;
+					top: 8px;
+					right: 8px;
+					font-size: 18px;
+					color: #C00;
+					cursor: pointer;
+					background: rgba(255,255,255,0.5);
+					border-radius: 5px;
+					padding: 0px 5px;
+					transition: .3s;
+					opacity: 0.7;
+					display: none;
+
+					&:hover{
+						background: rgba(255,255,255,0.7);
+						opacity: 1;
+					}
+				}
+			}
 		}
 	}
 
@@ -357,6 +383,9 @@ body.single-stand{
 			border-radius: 5px;
 			padding: 2px;
 		}
+
+
+		.galeria .imagens .img .delete{ display: block; }
 
 		.editar-galeria{
 			position: relative;
