@@ -12,6 +12,29 @@ body.post-type-archive-stand{
 			padding: 10px;
 			margin: 5px 2px;
 			border-radius: 3px;
+			&:hover{
+				background-color: #61aa91;
+				.info{
+					color: #ffffff;
+					a{
+						text-decoration: none;
+					}
+					.nome{
+						color: #ffffff;
+					}
+				}
+				.botao_verStand{
+					.link{
+						.btn-success{
+							background-color: #ffffff;
+							&:hover{
+								background-color: #00cb56;
+								color: #fff;
+							}
+						}						
+					}
+				}
+			}
 
 			.image{
 				position: relative;
@@ -21,15 +44,16 @@ body.post-type-archive-stand{
 			}
 
 			.info{
-				position: relative;
+				position: absolute;
 				display: inline-block;
 				vertical-align: top;
 				font-size: 12px;
 				color: #999;
-
+				margin-left: 10px;
 				.nome{
-					font-size: 18px;
+					font-size: 30px;
 					color: #61aa91;
+			    line-height: 30px;
 				}
 
 				.numeros{
@@ -44,10 +68,17 @@ body.post-type-archive-stand{
 						margin: 2px;
 					}
 				}
-
+			}
+			.botao_verStand{
+		    position: absolute;
+		    right: 10px;
+		    bottom: 15px;
 				.link{
 					display: block;
 					margin-top: 15px;
+					.btn-success{
+				    padding: 4px 10px 4px;
+					}
 				}
 			}
 		}

@@ -75,8 +75,17 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 			<div class="numero"><?php echo $numero['numero']; ?></div>
 
 			<?php } ?>
-		</div>
+		</div>		
 		<?php } ?>
+		<?php
+			$localizacao_stand = get_field('localizacao_stand');
+			//echo '<pre>' . print_r($localizacao_stand, true) . '</pre>';
+			if($localizacao_stand){
+				echo '<div class="numeros">
+								Localização: '.$localizacao_stand.'
+							</div>';
+			}
+		?>
 		<div class="descricao editable"><?php echo $post->post_content; ?></div>
 	</div>
 	<div class="imagem" newId="<?php echo get_post_thumbnail_id( $post->ID ); ?>">
