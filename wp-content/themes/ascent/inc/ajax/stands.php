@@ -17,7 +17,7 @@ function ajax_salvar_stand(){
 		$response['error'] = "Stand não identificado!";
 	}
 
-	$dono =  get_post_meta($request->ID, 'dono_stand', true);
+	$dono =  get_post_meta($request->id, 'dono_stand', true);
 
 	if( $dono != $current_user->ID && !in_array( 'administrator', $current_user->roles ) ) {
 
