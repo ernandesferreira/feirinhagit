@@ -19,7 +19,7 @@ function ajax_salvar_stand(){
 
 	$dono =  get_post_meta($request->ID, 'dono_stand', true);
 
-	if( $dono != $current_user->ID && !in_array( 'administrator', $current_user->roles ) ) {
+	if( $dono != $current_user->ID || !in_array( 'administrator', $current_user->roles ) ) {
 
 		$response['success'] = false;
 		$response['error'] = "Você não tem permissão para editar este stand!";

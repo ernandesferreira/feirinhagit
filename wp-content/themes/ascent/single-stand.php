@@ -27,7 +27,7 @@ if( is_numeric($banner_id) ){
 
 } else {
 
-	$banner = get_template_directory_uri().'/assets/images/banner_stand.jpg';
+	$banner = get_template_directory_uri().'/assets/images/capa_single.jpg';
 }
 
 $categorias = wp_get_post_categories($post->ID);
@@ -42,7 +42,7 @@ $numeros = get_field('numeros');
 
 $dono =  get_post_meta($post->ID, 'dono_stand', true);
 
-if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrator', $current_user->roles )) ) { ?>
+if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrator', $current_user->roles ) || in_array( 'editor', $current_user->roles )) ) { ?>
 <div class="botoes-edicao">
 	<div class="botao botao-editar" title="Editar Página" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-pencil"></i></div>
 	<div class="botao botao-salvar" title="Salvar" data-toggle="tooltip" data-id="<?php echo $post->ID; ?>" data-placement="bottom"><i class="fa fa-floppy-o"></i></div>
@@ -97,7 +97,7 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 
 				echo '<img src="'.$imagem.'" width="350px" />';
 			}else{
-				echo '<img src="http://via.placeholder.com/350x320" />';
+				echo '<img src="'.get_template_directory_uri().'/assets/images/stand_imagemaior.jpg'.'" />';
 			}
 		?>
 	</div>

@@ -81,6 +81,7 @@ get_header();
 
 
 	     <?php }  
+	     wp_pagenavi();
 	 		}
 
 	     ?>
