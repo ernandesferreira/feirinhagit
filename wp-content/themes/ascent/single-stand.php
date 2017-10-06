@@ -54,14 +54,14 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 
 <?php } ?>
 
+
 <div class="banner" style="background-image: url(<?php echo $banner; ?>)" newId="<?php echo $banner_id; ?>">
 	
 	<div class="editar-banner"><i class="fa fa-camera"></i> Trocar Imagem</div>
 
 </div>
 
-<div class="infos">
-	
+<div class="infos">	
 	<div class="texto">
 		<div class="titulo editable"><?php echo $post->post_title; ?></div>
 		<div class="numeros"> Categoria: <?php echo implode(', ',$nomes_categorias); ?> </div>
@@ -89,6 +89,16 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 		<div class="descricao editable"><?php echo $post->post_content; ?></div>
 	</div>
 	<div class="imagem" newId="<?php echo get_post_thumbnail_id( $post->ID ); ?>">
+		<div class="login_single" data-icon="<?php echo get_template_directory_uri().'/assets/images/pencil.png'; ?>">
+			<?php 
+				if( is_user_logged_in() ){
+					echo '<a class="sair" href="'.wp_logout_url( get_permalink() ).'" title="Login">Sair</a>';
+				}else{
+					echo '<a class="logar" href="'.wp_login_url( get_permalink() ).'" title="Login">Editar Stand</a>';
+				}
+			?>
+			
+		</div>
 		<div class="editar-imagem"><i class="fa fa-camera"></i> Trocar Imagem</div>
 		<?php 
 			if( get_post_thumbnail_id( $post->ID ) ){
@@ -100,7 +110,9 @@ if( is_user_logged_in() && ($dono == $current_user->ID || in_array( 'administrat
 				echo '<img src="'.get_template_directory_uri().'/assets/images/stand_imagemaior.jpg'.'" />';
 			}
 		?>
+		
 	</div>
+	
 
 </div>
 
@@ -219,3 +231,4 @@ if( $galeria ){
 
 
 <?php get_footer(); ?>
+

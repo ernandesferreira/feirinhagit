@@ -92,3 +92,12 @@ function enqueue_styles_scripts() {
 if (!is_admin()) {
     add_action('wp_enqueue_scripts', 'enqueue_styles_scripts');
 }
+
+
+add_action('after_setup_theme', 'remove_admin_bar');
+ 
+function remove_admin_bar() {
+if (!current_user_can('administrator') && !is_admin()) {
+  show_admin_bar(false);
+}
+}

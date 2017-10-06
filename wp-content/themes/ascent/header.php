@@ -25,6 +25,7 @@
 
 <body <?php body_class(); ?>>
   <?php do_action('before'); ?>
+
 <header id="masthead" class="site-header" role="banner">
     <div class="header-top">
         <div class="container">
